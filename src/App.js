@@ -1,23 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import checkGameWon from "./checkGameWon";
 
 function App() {
+  const [board, setBoard] = useState(Array(9).fill(""));
+  const [player, setPlayer] = useState("Player 1");
+
+  function handleMove(index) {
+    if (player === "Player 1") {
+      const addMove = [...board];
+      addMove[index] = "X";
+      setBoard(addMove);
+      checkGameWon(addMove)
+        ? setPlayer("Player 1 wins!")
+        : setPlayer("Player 2");
+    } else if (player === "Player 2") {
+      const addMove = [...board];
+      addMove[index] = "O";
+      setBoard(addMove);
+      checkGameWon(addMove)
+        ? setPlayer("Player 2 wins!")
+        : setPlayer("Player 1");
+    }
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Tic-Tac-Toe</h1>
+      <h2>{checkGameWon(board) ? `${player}` : `It's ${player}'s turn!`}</h2>
+      <div className="Board">
+        {board.map((buttonText, index) => (
+          <button
+            className="Tile"
+            key={index}
+            onClick={() => handleMove(index)}
+          >
+            {buttonText}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
