@@ -24,6 +24,11 @@ function App() {
     }
   }
 
+  function handleRestart() {
+    setBoard(Array(9).fill(""));
+    setPlayer("Player 1");
+  }
+
   return (
     <div className="App">
       <h1>Tic-Tac-Toe</h1>
@@ -39,6 +44,10 @@ function App() {
           </button>
         ))}
       </div>
+      <button className="Restart" onClick={handleRestart}>
+        {" "}
+        Restart?{" "}
+      </button>
     </div>
   );
 }
