@@ -22,12 +22,11 @@ function App() {
   }
 
   function handleMove(index) {
-    console.log(checkGameWon(board));
-    if (board[index] !== "") {
+    if (board[index] !== "" && checkGameWon(board) !== true) {
       setMessage("That space is taken!");
-    } else if (player === "X") {
+    } else if (player === "X" && checkGameWon(board) !== true) {
       updateBoard(index);
-    } else if (player === "O") {
+    } else if (player === "O" && checkGameWon(board) !== true) {
       updateBoard(index);
     }
   }
