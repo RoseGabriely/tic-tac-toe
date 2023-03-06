@@ -7,6 +7,18 @@ function App() {
   const [player, setPlayer] = useState("X");
   const [message, setMessage] = useState("It's player X's turn!");
 
+  function checkGameDraw() {
+    let counter = 0;
+    board.forEach((tile) => {
+      if (tile !== "") {
+        counter = counter + 1;
+      }
+    });
+    if (counter === 8 && checkGameWon(board) !== true) {
+      return true;
+    }
+  }
+
   function updateBoard(index) {
     const addMove = [...board];
     addMove[index] = player;
@@ -19,14 +31,19 @@ function App() {
         ? setMessage("It's player O's turn!")
         : setMessage("It's player X's turn!");
     }
+    if (checkGameDraw()) {
+      setMessage("It's a draw!");
+    }
   }
 
   function handleMove(index) {
-    if (board[index] !== "" && checkGameWon(board) !== true) {
+    if (
+      board[index] !== "" &&
+      checkGameWon(board) !== true &&
+      message !== "It's a draw!"
+    ) {
       setMessage("That space is taken!");
-    } else if (player === "X" && checkGameWon(board) !== true) {
-      updateBoard(index);
-    } else if (player === "O" && checkGameWon(board) !== true) {
+    } else if (checkGameWon(board) !== true && message !== "It's a draw!") {
       updateBoard(index);
     }
   }
