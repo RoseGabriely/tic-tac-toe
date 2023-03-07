@@ -7,7 +7,7 @@
   background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1)),
     url(https://images7.alphacoders.com/336/336285.jpg);
   background-repeat: no-repeat;
-  background-size: auto;
+  background-size: cover;
   color: white;
 }
 .Board {
@@ -21,6 +21,7 @@
   height: 10rem;
   font-size: 3rem;
   background-color: rgba(255, 255, 255, 0.5);
+  border: 0.1rem solid black;
 }
 .Restart {
   margin: 1rem;
